@@ -71,31 +71,31 @@ int WINAPI WinMain(HINSTANCE hInstance,
     GetClientRect(hwnd,&rct);
     glOrtho(0,rct.right, rct.bottom, 0, 1, -1);
 
-    //Инициализация кнопок
+    //Г€Г­ГЁГ¶ГЁГ Г«ГЁГ§Г Г¶ГЁГї ГЄГ­Г®ГЇГ®ГЄ
     Menu_AddButton("Start", 100, 100, 400, 100, 8, changeScene);
     Menu_AddButton("Quit", 100, 250, 400, 100, 8, exitProgram);
 
-    //Инициализация текстур
+    //Г€Г­ГЁГ¶ГЁГ Г«ГЁГ§Г Г¶ГЁГї ГІГҐГЄГ±ГІГіГ°
     unsigned int spriteSheet, background, wall;
     createTexture("src/spritesheet.png", &spriteSheet);
     createTexture("src/background.png", &background);
 
-    //Инициализация матрицы коллизий
+    //Г€Г­ГЁГ¶ГЁГ Г«ГЁГ§Г Г¶ГЁГї Г¬Г ГІГ°ГЁГ¶Г» ГЄГ®Г«Г«ГЁГ§ГЁГ©
     float collisionMatrix[] =
     {
         // x1       // x2       // y1       // y2
-        -100.0f,    1100.0f,    0.0f,       127.0f, //Пол
-        0.0f,       0.0f,       -100.0f,    800.0f, //Левая стена
-        1024.0f,    1024.0f,    -100.0f,    800.0f, //Правая стена
-        120.0f,     252.0f,     127.0f,     201.0f, //Земляной блок 1
-        0.0f,       120.0f,     127.0f,     263.0f, //Земляной блок 2
-        381.0f,     513.0f,     127.0f,     201.0f, //Земляной блок 3
-        640.0f,     774.0f,     127.0f,     201.0f, //Земляной блок 4
+        -100.0f,    1100.0f,    0.0f,       127.0f, //ГЏГ®Г«
+        0.0f,       0.0f,       -100.0f,    800.0f, //Г‹ГҐГўГ Гї Г±ГІГҐГ­Г 
+        1024.0f,    1024.0f,    -100.0f,    800.0f, //ГЏГ°Г ГўГ Гї Г±ГІГҐГ­Г 
+        120.0f,     252.0f,     127.0f,     201.0f, //Г‡ГҐГ¬Г«ГїГ­Г®Г© ГЎГ«Г®ГЄ 1
+        0.0f,       120.0f,     127.0f,     263.0f, //Г‡ГҐГ¬Г«ГїГ­Г®Г© ГЎГ«Г®ГЄ 2
+        381.0f,     513.0f,     127.0f,     201.0f, //Г‡ГҐГ¬Г«ГїГ­Г®Г© ГЎГ«Г®ГЄ 3
+        640.0f,     774.0f,     127.0f,     201.0f, //Г‡ГҐГ¬Г«ГїГ­Г®Г© ГЎГ«Г®ГЄ 4
     };
 
-    //Инициализация персонажей
+    //Г€Г­ГЁГ¶ГЁГ Г«ГЁГ§Г Г¶ГЁГї ГЇГҐГ°Г±Г®Г­Г Г¦ГҐГ©
     Character* mainCharacter = createCharacter(-20.0f, 300.0f, spriteSheet, 3, 8);
-    addVelocity(mainCharacter, 30, 0);                                              //Появление персонажа из-за края экрана
+    addVelocity(mainCharacter, 50, 0);                                              //ГЏГ®ГїГўГ«ГҐГ­ГЁГҐ ГЇГҐГ°Г±Г®Г­Г Г¦Г  ГЁГ§-Г§Г  ГЄГ°Г Гї ГЅГЄГ°Г Г­Г 
 
 
     /* program main loop */
@@ -124,14 +124,14 @@ int WINAPI WinMain(HINSTANCE hInstance,
             switch(SCENE)
             {
             case 0:
-                Menu_ShowMenu();                //Отрисовать меню
+                Menu_ShowMenu();                //ГЋГІГ°ГЁГ±Г®ГўГ ГІГј Г¬ГҐГ­Гѕ
                 break;
             case 1:
-                physics(mainCharacter);         //Обработать физику
-                playerControl(mainCharacter);   //Обработать управление
-                collision(mainCharacter, collisionMatrix, sizeof(collisionMatrix)); //Обработать коллизии
+                physics(mainCharacter);         //ГЋГЎГ°Г ГЎГ®ГІГ ГІГј ГґГЁГ§ГЁГЄГі
+                playerControl(mainCharacter);   //ГЋГЎГ°Г ГЎГ®ГІГ ГІГј ГіГЇГ°Г ГўГ«ГҐГ­ГЁГҐ
+                collision(mainCharacter, collisionMatrix, sizeof(collisionMatrix)); //ГЋГЎГ°Г ГЎГ®ГІГ ГІГј ГЄГ®Г«Г«ГЁГ§ГЁГЁ
 
-                drawCharacter(mainCharacter);   //Отрисовать персонажа
+                drawCharacter(mainCharacter);   //ГЋГІГ°ГЁГ±Г®ГўГ ГІГј ГЇГҐГ°Г±Г®Г­Г Г¦Г 
 
                 break;
             }
@@ -232,7 +232,7 @@ void DisableOpenGL (HWND hwnd, HDC hDC, HGLRC hRC)
     ReleaseDC(hwnd, hDC);
 }
 
-//Смена сцен (Нажатие esc)
+//Г‘Г¬ГҐГ­Г  Г±Г¶ГҐГ­ (ГЌГ Г¦Г ГІГЁГҐ esc)
 void changeScene()
 {
     if (SCENE)
